@@ -13,6 +13,7 @@ $(document).ready(function() {
     }
   }
 
+  // This is where the magic happens.
   function parseFile(file) {
     if (tests.filereader === true && acceptedTypes[file.type] === true) {
       var reader = new FileReader();
@@ -39,9 +40,11 @@ $(document).ready(function() {
           nodeText = svgHead + nodeText + svgFoot;
           zip.file(id+".svg", nodeText);
 
-          // Add file previews below -------------------ADD files as images with data URI, download zip button
-          items[i] = "<div>"+nodeText+"</div>";
-          $("#split-svgs").append(items[i]);
+          // Add file previews below if enable-preview is checked.
+          if ($('#enable-preview').is(':checked')) {
+            items[i] = "<div>"+nodeText+"</div>";
+            $("#split-svgs").append(items[i]);
+          }
         }
 
         content = zip.generate();
