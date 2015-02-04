@@ -1,7 +1,7 @@
 # [SVGsplit](http://svgsplit.com)
 
 SVGsplit is a tool for splitting an SVG file into more / smaller files. It takes
-the svg groups in a file (<g> tags) and makes each group into its own file.
+the svg groups in a file (```<g> tags```) and makes each group into its own file.
 Tools like Adobe Illustrator and Inkscape save each layer as a separate group,
 so if you are making icons and have an Illustrator file with a different icon
 on each layer, you can save the file as a .svg file and use this tool to make
