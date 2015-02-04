@@ -6,9 +6,7 @@
     <title>SVGsplit</title>
     <meta name="description" content="Splitting SVG groups into separate files to make working with SVG files less of a pain">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
-    
+
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -18,50 +16,50 @@
     <!--[if lt IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
-    
+
     <section>
       <h1 id="title"><b>SVG</b>split</h1>
-      
+
       <div id="holder"><div id="cta">drag &amp; drop svg file here</div></div>
-      
+
       <p id="upload" class="hidden"><label>Drag &amp; drop not supported, but you can still upload via this input field:<br><input id="file-input" type="file"></label></p>
       <div id="svg-file" class="hiddenA"></div>
       <p id="filereader" class="hidden">File API &amp; FileReader API not supported</p>
       <p id="formdata" class="hidden">XHR2's FormData is not supported</p>
       <p id="progress" class="hidden">XHR2's upload progress isn't supported</p>
       <p class="hidden">Upload progress: <progress id="uploadprogress" min="0" max="100" value="0">0</progress></p>
-      
+
       <div id="help">
         <h3>What is this thing?</h3>
         <p>
           SVGsplit is made for splitting "groups" (&lt;g&gt; tags) in svg files down into seperate svg files. It then outputs them on the page and automatically downloads them, packaged up as a zip file. This is useful for creating SVG icons and works quite well with Adobe Illustrator or Inkscape. Just save your source file as an SVG and drop it in the box above. All the layer names will become the new file names for the split up SVGs. Email me if you have any questions: tim[at]tscanlin.com
         </p>
       </div>
-      
+
       <div id="split-svgs">
         <h2>Preview</h2>
       </div>
-      
+
     </section>
-    
+
     <br /><br />
     <span id="credit">&copy; 2014 <a href="http://timscanlin.net">Tim Scanlin</a></span>
-    
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
     <script src="js/vendor/jszip.js"></script>
     <script src="js/vendor/zip.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
-    
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+
     <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-                                                              function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-                             e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-                             e.src='//www.google-analytics.com/analytics.js';
-                             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-59343135-1', 'auto');
+      ga('send', 'pageview');
     </script>
   </body>
 </html>
