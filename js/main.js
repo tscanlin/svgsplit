@@ -27,6 +27,10 @@ $(document).ready(function() {
         svgTag = result.match('<svg[^>]*>'),
         svgHead = svgTag[0],
         svgFoot = "</svg>";
+        
+        while (svgNode.children().length < 2) {
+          svgNode = svgNode.children();
+        }
 
         let styleLookup = {};
         for (var i = 0, length = svgNode.children().length; i < length; i++) {
