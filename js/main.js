@@ -34,7 +34,7 @@ $(document).ready(function() {
 
         for (var i = 0, length = svgNode.children().length; i < length; i++) {
           var node = svgNode.children().eq(i)[0],
-              id = svgNode.children().eq(i).removeAttr("display").attr("id"),
+              id = svgNode.children().eq(i).removeAttr("display").attr("id") || i,
               nodeText = serializer.serializeToString(node);
 
           nodeText = svgHead + nodeText + svgFoot;
