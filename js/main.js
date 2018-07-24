@@ -32,23 +32,53 @@ $(document).ready(function() {
           svgNode = svgNode.children();
         }
 
+        let styleLookup = {};
         for (var i = 0, length = svgNode.children().length; i < length; i++) {
           var node = svgNode.children().eq(i)[0],
-              id = svgNode.children().eq(i).removeAttr("display").attr("id"),
-              nodeText = serializer.serializeToString(node);
+            id = svgNode.children().eq(i).removeAttr("display").attr("id") || i,
+            nodeText = serializer.serializeToString(node),
+            nodeName = node.nodeName;
 
-          nodeText = svgHead + nodeText + svgFoot;
-          zip.file(id+".svg", nodeText);
+          if (nodeName === 'style') {
+            // Store styles in dictionary
+            let styles = node.innerHTML;
+            let styleClasses = styles.split('}');
+            styleClasses.forEach(function (styleClass) {
+              let matches = /\.(.*?)({.*)/.exec(styleClass.trim());
+              if (matches) {
+                let className = matches[1];
+                let styleRules = matches[2] + '}';
+                styleLookup[className] = styleRules;
+              }
+            });
+          } else {
+            let classes = [];
+            let classList = getAllMatches(node.innerHTML, /class="([^"]+)"/g);
+            classList.forEach(function (styleListItem) {
+              classes = classes.concat(styleListItem.split(' '));
+            });
+            var uniqueClasses = onlyUnique(classes);
+            var nodeStyles = '';
+            if (uniqueClasses.length) {
+              nodeStyles = '<style type="text/css">';
+              uniqueClasses.forEach(function (uniqueClass) {
+                nodeStyles += '.' + uniqueClass + styleLookup[uniqueClass];
+              });
+              nodeStyles += '</style>';
+            }
+            nodeText = svgHead + nodeStyles + nodeText + svgFoot;
+            zip.file(id + ".svg", nodeText);
 
-          // Add file previews below if enable-preview is checked.
-          if ($('#enable-preview').is(':checked')) {
-            items[i] = "<div>"+nodeText+"</div>";
-            $("#split-svgs").append(items[i]);
+            // Add file previews below if enable-preview is checked.
+            if ($('#enable-preview').is(':checked')) {
+              items[i] = "<div>" + nodeText + "</div>";
+              $("#split-svgs").append(items[i]);
+            }
           }
         }
 
         content = zip.generate();
-        location.href="data:application/zip;base64," + content; // Enable for auto-download
+        location.href = "data:application/zip;base64," + content; // Enable for auto-download
       };
 
       reader.readAsText(file);
@@ -107,3 +137,23 @@ $(document).ready(function() {
     };
   }
 });
+
+function onlyUnique(arr) {
+  var unique = function (value, index, self) {
+    return self.indexOf(value) === index;
+  }
+  return arr.filter(unique);
+}
+
+function getAllMatches(str, regex) {
+  var matches;
+  var list = [];
+
+  do {
+    matches = regex.exec(str);
+    if (matches) {
+      list.push(matches[1]);
+    }
+  } while (matches);
+  return list;
+}
