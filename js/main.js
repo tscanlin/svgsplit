@@ -77,8 +77,22 @@ $(document).ready(function() {
           }
         }
 
-        content = zip.generate();
-        location.href = "data:application/zip;base64," + content; // Enable for auto-download
+        // Handle more than 100 files.
+        const len = Object.keys(zip.files)
+        let newZip = []
+        let index = -1
+        len.forEach((k, i) => {
+          if (i % 100 == 0) {
+            newZip.push(new JSZip())
+            index++
+          }
+          newZip[index].file(k, zip.files[k].asText())
+        })
+
+        newZip.forEach((z, i) => {
+          console.log(i)
+          location.href = `data:application/zip;base64,${z.generate()}`
+        })
       };
 
       reader.readAsText(file);
