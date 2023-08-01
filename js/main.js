@@ -77,12 +77,12 @@ $(document).ready(function() {
           }
         }
 
-        // Handle more than 100 files.
+        // Handle more than 300 files.
         const len = Object.keys(zip.files)
         let newZip = []
         let index = -1
         len.forEach((k, i) => {
-          if (i % 100 == 0) {
+          if (i % 300 == 0) {
             newZip.push(new JSZip())
             index++
           }
