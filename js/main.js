@@ -90,8 +90,10 @@ $(document).ready(function() {
         })
 
         newZip.forEach((z, i) => {
-          console.log(i)
-          location.href = `data:application/zip;base64,${z.generate()}`
+          // console.log(i)
+          const href = `data:application/zip;base64,${z.generate()}`
+          location.href = href
+          $("#split-svgs").append(`<a target="_blank" href="${href}">Download File #${i}</a>`)
         })
       };
 
