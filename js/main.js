@@ -89,11 +89,12 @@ $(document).ready(function() {
           newZip[index].file(k, zip.files[k].asText())
         })
 
+        const linkContainer = $("#split-svgs").append("div")
         newZip.forEach((z, i) => {
           // console.log(i)
           const href = `data:application/zip;base64,${z.generate()}`
           location.href = href
-          $("#split-svgs").append(`<a target="_blank" href="${href}">Download File #${i}</a>`)
+          linkContainer.append(`<a target="_blank" href="${href}">Download File #${i}</a><br />`)
         })
       };
 
